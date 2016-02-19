@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><source>
+    <url>http://wirkn.com</url>
+    <publisher>wirkn</publisher>
+    <item>
+        <title><![CDATA[Something cool 1]]></title>
+        <description>This will be unique</description>
+    </item>
+    <item>
+        <title><![CDATA[Something cool 2]]></title>
+        <description>This will be unique</description>
+    </item>
+    <item>
+        <title><![CDATA[Something cool 3]]></title>
+        <description>This will be unique</description>
+    </item>
+    <item>
+        <title><![CDATA[Something cool 4]]></title>
+        <description>This will be unique</description>
+    </item>
+    <item>
+        <title><![CDATA[Something cool 5]]></title>
+        <description>This will be unique</description>
+    </item>
+</source>

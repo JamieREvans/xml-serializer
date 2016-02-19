@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><source>
+    <channel>
+        <url>http://wirkn.com</url>
+        <publisher>wirkn</publisher>
+        <item>
+            <title>Something cool 1</title>
+            <description>This will be unique</description>
+        </item>
+        <item>
+            <title>Something cool 2</title>
+            <description>This will be unique</description>
+        </item>
+        <item>
+            <title>Something cool 3</title>
+            <description>This will be unique</description>
+        </item>
+        <item>
+            <title>Something cool 4</title>
+            <description>This will be unique</description>
+        </item>
+        <item>
+            <title>Something cool 5</title>
+            <description>This will be unique</description>
+        </item>
+    </channel>
+</source>
