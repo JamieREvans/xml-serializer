@@ -14,21 +14,21 @@ function compareXMLToFile(xml, fileName, callback) {
 
 describe('XML Parser', function() {
   var xml;
-  var feedValues;
+  var feedContent;
   var items;
   var attributes;
   before(function() {
-    feedValues = {
+    feedContent = {
       url: 'http://wirkn.com',
       publisher: 'wirkn'
     };
     items = [];
     for (var index = 0; index < 5; index++) {
-      var itemValues = {
+      var itemContent = {
         title: 'Something cool ' + (index + 1),
         description: 'This will be unique'
       };
-      items.push(XML('item', null, null, itemValues));
+      items.push(XML('item', null, null, itemContent));
     }
     attributes = {
         'xmlns:dc':         'http://purl.org/dc/elements/1.1/',
@@ -39,7 +39,7 @@ describe('XML Parser', function() {
   });
   describe('Generating a single level object', function() {
     before(function() {
-      xml = XML('source', null, null, feedValues).toXML(true);
+      xml = XML('source', null, null, feedContent).toXML(true);
     });
     it('should have be single level with a url and publisher', function(done) {
       compareXMLToFile(xml, 'single-level-with-values', done);
@@ -47,7 +47,7 @@ describe('XML Parser', function() {
   });
   describe('Generating a single level object with items', function() {
     before(function() {
-      xml = XML('source', items, null, feedValues).toXML(true);
+      xml = XML('source', items, null, feedContent).toXML(true);
     });
     it('should have be single level with a url and publisher', function(done) {
       compareXMLToFile(xml, 'single-level-with-items-and-values', done);
@@ -63,7 +63,7 @@ describe('XML Parser', function() {
   });
   describe('multi-level feed with values and items', function() {
     before(function() {
-      innerFeed = XML('channel', items, null, feedValues);
+      innerFeed = XML('channel', items, null, feedContent);
       outerFeed = XML('source', [innerFeed]);
       xml = outerFeed.toXML(true);
     });
@@ -76,7 +76,7 @@ describe('XML Parser', function() {
       items.forEach(function(item) {
         item.useCData = true;
       });
-      xml = XML('source', items, null, feedValues).toXML(true);
+      xml = XML('source', items, null, feedContent).toXML(true);
     });
     after(function() {
       items.forEach(function(item) {
@@ -93,7 +93,7 @@ describe('XML Parser', function() {
         item.useCData = true;
         item.cdataFields = ['title'];
       });
-      xml = XML('source',items,null,feedValues,null).toXML(true);
+      xml = XML('source', items, null, feedContent, null).toXML(true);
     });
     after(function() {
       items.forEach(function(item) {
@@ -103,6 +103,23 @@ describe('XML Parser', function() {
     });
     it('should have single level object, with title wrapped in cdata',function(done) {
       compareXMLToFile(xml,'single-level-with-one-attribute-cdata-wrapped-items',done);
+    });
+  });
+  describe('Generating a single level object wtih only a string value',function() {
+    before(function() {
+      xml = XML('source', null, attributes, "Sample String", null).toXML(true);
+      console.log(xml);
+    });
+    it('should have single level object, with title wrapped in cdata', function(done) {
+      compareXMLToFile(xml,'single-level-with-string-value', done);
+    });
+  });
+  describe('Generating a single level object wtih only a string value',function() {
+    before(function() {
+      xml = XML('source', null, attributes, "Sample String", { useCData: true }).toXML(true);
+    });
+    it('should have single level object, with title wrapped in cdata', function(done) {
+      compareXMLToFile(xml,'single-level-with-cdata-string-value', done);
     });
   });
 });
