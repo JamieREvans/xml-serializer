@@ -87,7 +87,7 @@ describe('XML Parser', function() {
       compareXMLToFile(xml, 'single-level-with-cdata-wrapped-items', done);
     });
   });
-  describe('Generating a single level object wtih one item wrapped with cdata',function() {
+  describe('Generating a single level object wtih one item wrapped with cdata', function() {
     before(function() {
       items.forEach(function(item) {
         item.useCData = true;
@@ -101,25 +101,25 @@ describe('XML Parser', function() {
         item.cdataFields = undefined;
       });
     });
-    it('should have single level object, with title wrapped in cdata',function(done) {
-      compareXMLToFile(xml,'single-level-with-one-attribute-cdata-wrapped-items',done);
+    it('should have single level object, with title wrapped in cdata', function(done) {
+      compareXMLToFile(xml, 'single-level-with-one-attribute-cdata-wrapped-items', done);
     });
   });
-  describe('Generating a single level object wtih only a string value',function() {
+  describe('Generating a single level object wtih only a string value', function() {
     before(function() {
       xml = XML('source', null, attributes, "Sample String", null).toXML(true);
       console.log(xml);
     });
     it('should have single level object, with title wrapped in cdata', function(done) {
-      compareXMLToFile(xml,'single-level-with-string-value', done);
+      compareXMLToFile(xml, 'single-level-with-string-value', done);
     });
   });
-  describe('Generating a single level object wtih only a string value',function() {
+  describe('Generating a single level object wtih only a string value', function() {
     before(function() {
       xml = XML('source', null, attributes, "Sample String", { useCData: true }).toXML(true);
     });
     it('should have single level object, with title wrapped in cdata', function(done) {
-      compareXMLToFile(xml,'single-level-with-cdata-string-value', done);
+      compareXMLToFile(xml, 'single-level-with-cdata-string-value', done);
     });
   });
 });
