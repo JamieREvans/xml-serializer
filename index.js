@@ -2,6 +2,8 @@ var mime = require('mime-types');
 var xml = require('xml');
 var fs = require('fs');
 
+const xmlPrefix = '<?xml version="1.0" encoding="UTF-8"?>';
+
 class XML {
   constructor(name, xmlItems, attributes, content, options) {
     // name is required
@@ -18,8 +20,8 @@ class XML {
     }
   }
 
-  toXML(indent) {
-    return '<?xml version="1.0" encoding="UTF-8"?>' + xml(generateXMLObject(this), indent);
+  toXML(indent, includePrefix = true) {
+    return (includePrefix ? xmlPrefix : "") + xml(generateXMLObject(this), indent);
   }
 
   cdataForKey(key) {

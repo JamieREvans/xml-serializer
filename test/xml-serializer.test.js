@@ -45,6 +45,14 @@ describe('XML Parser', function() {
       compareXMLToFile(xml, 'single-level-with-values', done);
     });
   });
+  describe('Generating a single level object', function() {
+    before(function() {
+      xml = new XML('source', null, null, feedContent).toXML(true, false);
+    });
+    it('should have be single level with a url and publisher', function(done) {
+      compareXMLToFile(xml, 'single-level-with-values-and-no-prefix', done);
+    });
+  });
   describe('Generating a single level object with items', function() {
     before(function() {
       xml = new XML('source', items, null, feedContent).toXML(true);
