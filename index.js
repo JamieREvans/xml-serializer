@@ -2,23 +2,29 @@ var mime = require('mime-types');
 var xml = require('xml');
 var fs = require('fs');
 
-function XML(name, xmlItems, attributes, content, options) {
-  // name is required
-  if (!name) {
-    return null;
+class XML {
+  constructor(name, xmlItems, attributes, content, options) {
+    // name is required
+    if (!name) {
+      throw new Error("Name is required");
+    }
+    this.attributes = attributes;
+    this.content = content;
+    this.items = xmlItems;
+    this.name = name;
+    if (options) {
+      this.useCData = options.useCData;
+      this.cdataFields = options.cdataFields;
+    }
   }
-  var xml = {};
-  xml.attributes = attributes;
-  xml.content = content;
-  xml.items = xmlItems;
-  xml.name = name;
-  if (options) {
-    xml.useCData = options.useCData;
-    xml.cdataFields = options.cdataFields;
+
+  toXML(indent) {
+    return '<?xml version="1.0" encoding="UTF-8"?>' + xml(generateXMLObject(this), indent);
   }
-  xml.toXML = toXML;
-  xml.cdataForKey = cdataForKey;
-  return xml;
+
+  cdataForKey(key) {
+    return this.useCData && (!this.cdataFields || this.cdataFields.indexOf(key) >= 0);
+  }
 }
 
 function generateXMLObject(rootXML) {
@@ -69,14 +75,6 @@ function generateXMLObject(rootXML) {
   var xmlObject = {};
   xmlObject[rootXML.name] = xmlContent;
   return xmlObject;
-}
-
-function toXML(indent) {
-  return '<?xml version="1.0" encoding="UTF-8"?>' + xml(generateXMLObject(this), indent);
-}
-
-function cdataForKey(key) {
-  return this.useCData && (!this.cdataFields || this.cdataFields.indexOf(key) >= 0);
 }
 
 module.exports = XML;
